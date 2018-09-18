@@ -1,0 +1,29 @@
+version: "2"
+services:
+  app:
+    container_name: "consumer"  
+    build: .
+    ports:
+      - "4000:4000"
+    networks:
+      - default # this network
+      - app2_default # external network
+      - api # external network
+    external_links:
+      - ftp:ftp
+      - api:localhost
+    environment:
+      PUBLICHOST: "localhost"
+      FTP_USER_NAME: "test"
+      FTP_USER_PASS: "test"
+      FTP_USER_HOME: "/home/test"
+    restart: always
+
+networks:
+  default: # this network (app2)
+    driver: bridge
+  app2_default: # external network (app1)
+    external: true
+  api: # external network (app1)
+    external: 
+      name: app
