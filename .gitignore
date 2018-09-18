@@ -1,0 +1,6 @@
+service/app/node_modules
+service2/app/node_modules
+service/node_modules
+consumer/node_modules
+service/data
+db/data

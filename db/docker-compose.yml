@@ -1,0 +1,19 @@
+version: '2'
+
+volumes:
+  mongostorage:
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
+    ports:
+      - "27017:27017"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MONGODB_EXTRA_FLAGS=--wiredTigerCacheSizeGB=2
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - mongostorage:/data/db
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
