@@ -1,0 +1,13 @@
+FROM stilliard/pure-ftpd
+
+CMD /run.sh -c 30 -C 10 -l puredb:/etc/pure-ftpd/pureftpd.pdb -E -j -R -P $PUBLICHOST -p 30000:30059
+
+RUN mkdir -p /ftp
+
+WORKDIR /ftp
+
+
+# COPY programming-languages.csv /ftp/programming-languages.csv
+COPY . .
+
+# RUN curl -T programming-languages.csv ftp://localhost --user test:test
